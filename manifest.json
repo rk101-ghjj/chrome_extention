@@ -1,0 +1,36 @@
+{
+  "manifest_version": 3,
+  "name": "Stock Price Tracker",
+  "version": "1.0",
+  "description": "Track stock prices and get alerts for price drops.",
+  "permissions": [
+    "storage",
+    "activeTab",
+    "notifications",
+    "alarms"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": "icon.png"
+  },
+  "icons": {
+    "128": "icon.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://finance.yahoo.com/*", "https://www.marketwatch.com/*", "https://www.google.com/finance/*"],
+      "js": ["content.js"]
+    }
+  ],
+  "host_permissions": [
+    "https://finance.yahoo.com/*",
+    "https://www.marketwatch.com/*",
+    "https://www.google.com/finance/*"
+  ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'"
+  }
+}
